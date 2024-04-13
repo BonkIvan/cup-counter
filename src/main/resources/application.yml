@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: cup-counter
+
+  datasource:
+    url: ${CUPCOUNTER_DB_NAME}
+    username: ${CUPCOUNTER_DB_USER}
+    password: ${CUPCOUNTER_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+
