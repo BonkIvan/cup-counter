@@ -21,15 +21,15 @@ services:
       CUPCOUNTER_DB_USER:  ${DATABASE_USER}
       CUPCOUNTER_DB_PASSWORD:  ${DATABASE_PASSWORD}
       CUPCOUNTER_DB_NAME:  ${DATABASE_NAME}
-      CUPCOUNTER_DB_HOST:  database:5432
+      CUPCOUNTER_DB_HOST:  database:5433
     depends_on:
       - database
     networks:
       - cup_counter-network
-  networks:
+networks:
+    cup_counter-network:
+      driver: bridge
 
-
-     # driver: bridge
 
 
 
