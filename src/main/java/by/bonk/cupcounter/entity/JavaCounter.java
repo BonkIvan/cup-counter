@@ -23,9 +23,9 @@ public class JavaCounter {
     @Column(name = "cupCount")
     private int cupCount;
 
-    @ManyToOne(optional = false)
+   /* @ManyToOne(optional = false)
     @JoinColumn(name = "chat_id", nullable = false)
-    private User user;
+    private User user;*/
 
 
 }
