@@ -7,16 +7,16 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRAS_DB: ${DATABASE_NAME}
-      POSTGRAS_USER: ${DATABASE_USER}
-      POSTGRAS_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     networks:
       - cup_counter-network
 
   backend:
-    image: cup_counter
+    image: cup-counter
     ports:
-      - '8080:8080'
+      - '8081:8081'
     environment:
       CUPCOUNTER_DB_USER:  ${DATABASE_USER}
       CUPCOUNTER_DB_PASSWORD:  ${DATABASE_PASSWORD}
