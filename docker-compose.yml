@@ -18,17 +18,20 @@ services:
     ports:
       - '8081:8081'
     environment:
-      CUPCOUNTER_DB_USER:  ${DATABASE_USER}
-      CUPCOUNTER_DB_PASSWORD:  ${DATABASE_PASSWORD}
-      CUPCOUNTER_DB_NAME:  ${DATABASE_NAME}
-      CUPCOUNTER_DB_HOST:  database:5433
+      CUPCOUNTER_DB_USER: ${DATABASE_USER}
+      CUPCOUNTER_DB_PASSWORD: ${DATABASE_PASSWORD}
+      CUPCOUNTER_DB_NAME: ${DATABASE_NAME}
+      CUPCOUNTER_DB_HOST: database:5432
+      CUPCOUNTER_BOT_NAME: ${BOT_NAME}
+      CUPCOUNTER_BOT_TOKEN: ${BOT_TOKEN}
+      CUPCOUNTER_BOT_OWNER: ${BOT_OWNER}
     depends_on:
       - database
     networks:
       - cup_counter-network
 networks:
-    cup_counter-network:
-      driver: bridge
+  cup_counter-network:
+    driver: bridge
 
 
 

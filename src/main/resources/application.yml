@@ -3,13 +3,13 @@ spring:
     name: cup-counter
 
   datasource:
-    url: jdbc:postgresql://${STUDENTS_DB_HOST}/${DATABASE_NAME}
+    url: jdbc:postgresql://${DATABASE_HOST}/${DATABASE_NAME}
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-        ddl-auto: create
+      ddl-auto: create
 
     show-sql: true
     properties:
@@ -18,9 +18,9 @@ spring:
 
 
 bot:
-  name: BrewBro007Bot
-  key: 6465437586:AAFY7uiDxnuSmzZ7H8qUb3zimgNkzRF2Jc8
-  owner: 392887889
+  name: ${BOT_NAME}
+  key: ${BOT_TOKEN}
+  owner: ${BOT_OWNER}
 
 
 

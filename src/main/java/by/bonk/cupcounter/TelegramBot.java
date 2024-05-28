@@ -2,17 +2,22 @@ package by.bonk.cupcounter;
 
 import by.bonk.cupcounter.config.BotConfig;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+
 @Component
 @Data
 public class TelegramBot extends TelegramLongPollingBot {
+    @Autowired
+    private  BotConfig botConfig;
 
-    private final BotConfig botConfig;
+
+
 
     @Override
     public String getBotUsername() {
