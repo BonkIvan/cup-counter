@@ -3,11 +3,13 @@ package by.bonk.cupcounter.repository;
 import by.bonk.cupcounter.entity.User;
 import by.bonk.cupcounter.enumeration.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 import java.util.Optional;
 
-@EnableJpaRepositories
+
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<Role> findRoleByChatId(Long chatId);
+ //   Optional<Role>  findRoleByChatId(Long chatId);
+    User getReferenceByChatId(Long chatId);
+
+    Optional<Role> getRoleByChatId(long chatId);
+
 }
