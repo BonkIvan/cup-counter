@@ -1,6 +1,7 @@
 package by.bonk.cupcounter;
 
 import by.bonk.cupcounter.MessageService.MessageHandler;
+import by.bonk.cupcounter.calendar.CalendarUtil;
 import by.bonk.cupcounter.config.BotConfig;
 import by.bonk.cupcounter.enumeration.Role;
 import by.bonk.cupcounter.service.JavaCounterService;
@@ -9,6 +10,7 @@ import by.bonk.cupcounter.service.WaitingUserService;
 import by.bonk.cupcounter.utils.UserVerifier;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -20,6 +22,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -31,17 +34,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 
     public final CommandsList commandsList;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserVerifier userVerifier;
-    @Autowired
-    private MessageHandler messageHandler;
-    @Autowired
-    private JavaCounterService javaCounterService;
-    @Autowired
-    private WaitingUserService waitingUserService;
-
+    private final UserService userService;
+    private final UserVerifier userVerifier;
+    private final MessageHandler messageHandler;
+    private final JavaCounterService javaCounterService;
+    private final WaitingUserService waitingUserService;
+    private final CalendarUtil calendarUtil;
 
     //  private EchoAction echoAction = new EchoAction("/echo");
 
@@ -58,6 +56,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+
 
         if (update.hasMessage() && update.getMessage().hasText()) {
             String messageText = update.getMessage().getText();
@@ -126,9 +125,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                 message.setText("User: " + update.getMessage().getChat().getFirstName() + " get echo");
                 executeMessage(message);
                 break;
-            case "/stop":
-                Action echoAction = new EchoAction("update");
-                echoAction.callback(update).getMethod();
+            case "/help":
+
+                calendarUtil.generateKeyboard(new LocalDate());
                 break;
             case "Add cup":
                 javaCounterService.addCup(chatId);
