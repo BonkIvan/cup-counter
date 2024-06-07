@@ -7,28 +7,31 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRAS_DB: ${DATABASE_NAME}
-      POSTGRAS_USER: ${DATABASE_USER}
-      POSTGRAS_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     networks:
       - cup_counter-network
 
   backend:
-    image: cup_counter
+    image: cup-counter
     ports:
-      - '8080:8080'
+      - '8081:8081'
     environment:
-      CUPCOUNTER_DB_USER:  ${DATABASE_USER}
-      CUPCOUNTER_DB_PASSWORD:  ${DATABASE_PASSWORD}
-      CUPCOUNTER_DB_NAME:  ${DATABASE_NAME}
-      CUPCOUNTER_DB_HOST:  database:5433
+      CUPCOUNTER_DB_USER: ${DATABASE_USER}
+      CUPCOUNTER_DB_PASSWORD: ${DATABASE_PASSWORD}
+      CUPCOUNTER_DB_NAME: ${DATABASE_NAME}
+      CUPCOUNTER_DB_HOST: database:5432
+      CUPCOUNTER_BOT_NAME: ${BOT_NAME}
+      CUPCOUNTER_BOT_TOKEN: ${BOT_TOKEN}
+      CUPCOUNTER_BOT_OWNER: ${BOT_OWNER}
     depends_on:
       - database
     networks:
       - cup_counter-network
 networks:
-    cup_counter-network:
-      driver: bridge
+  cup_counter-network:
+    driver: bridge
 
 
 

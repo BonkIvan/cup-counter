@@ -3,12 +3,34 @@ spring:
     name: cup-counter
 
   datasource:
-    url: ${CUPCOUNTER_DB_NAME}
-    username: ${CUPCOUNTER_DB_USER}
-    password: ${CUPCOUNTER_DB_PASSWORD}
+    url: jdbc:postgresql://${DATABASE_HOST}/${DATABASE_NAME}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
+
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+
+bot:
+  name: ${BOT_NAME}
+  key: ${BOT_TOKEN}
+  owner: ${BOT_OWNER}
+
+
+
+
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/cup_counter
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
 
 

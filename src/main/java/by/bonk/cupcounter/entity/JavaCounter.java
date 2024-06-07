@@ -2,7 +2,6 @@ package by.bonk.cupcounter.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.Date;
 
 @Entity(name = "java_counter")
@@ -17,15 +16,16 @@ public class JavaCounter {
 
     @Column(name = "userChatId", nullable = false)
     private  Long userChatId;
+
     @Column(name = "date", nullable = false)
-    private Date date;
+    private String date;
 
     @Column(name = "cupCount")
     private int cupCount;
 
-    @ManyToOne(optional = false)
+   /* @ManyToOne(optional = false)
     @JoinColumn(name = "chat_id", nullable = false)
-    private User user;
+    private User user;*/
 
 
 }

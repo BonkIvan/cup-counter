@@ -1,11 +1,9 @@
 package by.bonk.cupcounter.entity;
 
-import by.bonk.cupcounter.Role;
+import by.bonk.cupcounter.enumeration.Role;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.sql.Timestamp;
-import java.util.List;
 
 //@Entity(name = "users")
 @Entity(name = "users")
@@ -33,8 +31,8 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @OneToMany(mappedBy = "user")
-    private List<JavaCounter> javaCounterList;
+   /* @OneToMany(mappedBy = "user")
+    private List<JavaCounter> javaCounterList;*/
 
 
     @Override
