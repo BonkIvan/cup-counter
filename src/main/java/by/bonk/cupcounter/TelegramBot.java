@@ -2,6 +2,8 @@ package by.bonk.cupcounter;
 
 import by.bonk.cupcounter.MessageService.MessageHandler;
 import by.bonk.cupcounter.calendar.CalendarUtil;
+import by.bonk.cupcounter.command.CommandHandler;
+import by.bonk.cupcounter.command.CommandProvider;
 import by.bonk.cupcounter.config.BotConfig;
 import by.bonk.cupcounter.enumeration.Role;
 import by.bonk.cupcounter.service.JavaCounterService;
@@ -76,14 +78,21 @@ public class TelegramBot extends TelegramLongPollingBot {
             //отправляет (пока только) владельцу бота сообщение с секретным ключем.
             if (messageText.startsWith("/start") && botConfig.getOwnerId() != chatId && userService.checkNewUser(chatId)) {
                 waitingUserService.addNewWaitingUser(update.getMessage());
-                //  executeMessage(messageHandler.sendMessageForWaitingUser(message, chatId, "wait you"));
+                executeMessage(messageHandler.sendMessageForWaitingUser(message, chatId, "wait you"));
                 sendSecretKeyMessageForOwner(chatId, update.getMessage().getChat().getFirstName());
-
             }
+
+
+            if (messageText.startsWith("/")) {
+                CommandHandler command =  new CommandProvider().getCommand(messageText,userService.getRole(chatId));
+                executeMessage(command.handleCommand("привет медвед ", chatId));
+            }
+
+
 
             if (waitingUserService.checkWaitingUserByChatId(chatId)
                     && waitingUserService.getSecretKeyForWaitingUserByChatId(chatId).equals(messageText)) {
-               executeMessage( waitingUserService.fromWaitingToUser(update.getMessage(), message));
+                executeMessage(waitingUserService.fromWaitingToUser(update.getMessage(), message));
             }
 
 
@@ -100,8 +109,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                     executeMessage(messageHandler.sendMessageForOwner(message, chatId, "Hi Owner"));
                 } else if (userService.getRole(chatId).equals(Role.ROLE_USER)) {
                     executeMessage(messageHandler.sendMessageForUser(message, chatId, "Hi User"));
+                } else if (userService.getRole(chatId).equals(Role.UNKNOWN_ROLE)) {
+                    executeMessage(messageHandler.sendMessageForUser(message, chatId, "Hi User"));
                 }
-            } else if(waitingUserService.checkWaitingUserByChatId(chatId)) {
+            } else if (waitingUserService.checkWaitingUserByChatId(chatId)) {
                 executeMessage(messageHandler.sendMessageForWaitingUser(message, chatId, "wait you"));
             }
 
@@ -116,7 +127,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 
         switch (messageText) {
-            case "/start":
+           /* case "/start":
                // message.setText("hi user: " + update.getMessage().getChat().getFirstName() + "!");
                 //  message.setText(" id: " + update.getMessage().getChat().getId());
                 executeMessage(message);
@@ -128,7 +139,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             case "/help":
 
                 calendarUtil.generateKeyboard(new LocalDate());
-                break;
+                break;*/
             case "Add cup":
                 javaCounterService.addCup(chatId);
                 message.setText("User: " + update.getMessage().getChat().getFirstName() + " cup has been added");
@@ -138,35 +149,33 @@ public class TelegramBot extends TelegramLongPollingBot {
                 executeMessage(message);
         }
 
-    }
+        }
 
-}
-
-
-
-
-public void executeMessage(SendMessage message) {
-    try {
-        execute(message);
-    } catch (TelegramApiException e) {
-        throw new RuntimeException(e);
-    }
-
-}
-
-public void sendSecretKeyMessageForOwner(Long chatId, String textToSend) {
-    var users = userService.ownerArrayList();
-    for (var user : users) {
-        SendMessage message = new SendMessage();
-        message.setChatId(String.valueOf(user.getChatId()));
-        message.setText("Secret key: \n "
-                + waitingUserService.getSecretKeyForWaitingUserByChatId(chatId)
-                + " \n for user " + textToSend);
-        executeMessage(message);
     }
 
 
-}
+    public void executeMessage(SendMessage message) {
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void sendSecretKeyMessageForOwner(Long chatId, String textToSend) {
+        var users = userService.ownerArrayList();
+        for (var user : users) {
+            SendMessage message = new SendMessage();
+            message.setChatId(String.valueOf(user.getChatId()));
+            message.setText("Secret key: \n "
+                    + waitingUserService.getSecretKeyForWaitingUserByChatId(chatId)
+                    + " \n for user " + textToSend);
+            executeMessage(message);
+        }
+
+
+    }
 
 }
 

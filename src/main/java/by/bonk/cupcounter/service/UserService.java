@@ -12,9 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.sql.Array;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -55,6 +53,7 @@ public class UserService {
     }
 
     public Role getRole(Long chatId) {
+
         return userRepository.getReferenceByChatId(chatId).getRole();
 
     }
@@ -88,6 +87,14 @@ public class UserService {
         }
 
         return userArrayList();
+    }
+
+    public String userName(Long chatId) {
+        return userRepository.getReferenceByChatId(chatId).getUserName();
+    }
+
+    public Date registerDate(Long chatId) {
+        return userRepository.getReferenceByChatId(chatId).getRegisteredAt();
     }
 
 }

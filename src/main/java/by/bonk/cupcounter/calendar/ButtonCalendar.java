@@ -7,9 +7,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import java.util.List;
 
-@Component
-@RequiredArgsConstructor
-public class ButtonCalendar {
+/*@Component
+@RequiredArgsConstructor*/
+/*public class ButtonCalendar {
 
         private static final InlineKeyboardButton START_BUTTON = new InlineKeyboardButton("Start");
         private static final InlineKeyboardButton HELP_BUTTON = new InlineKeyboardButton("Help");
@@ -31,5 +31,5 @@ public class ButtonCalendar {
 
             return markupInline;
         }
-    }
+    }*/
 

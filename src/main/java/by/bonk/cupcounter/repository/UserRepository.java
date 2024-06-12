@@ -7,7 +7,7 @@ import java.util.Optional;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
- //   Optional<Role>  findRoleByChatId(Long chatId);
+   Optional<Role>  findRoleByChatId(Long chatId);
     User getReferenceByChatId(Long chatId);
 
     Optional<Role> getRoleByChatId(long chatId);
