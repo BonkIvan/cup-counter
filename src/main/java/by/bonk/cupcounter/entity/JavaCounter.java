@@ -17,8 +17,11 @@ public class JavaCounter {
     @Column(name = "userChatId", nullable = false)
     private  Long userChatId;
 
-    @Column(name = "date", nullable = false)
-    private String date;
+  /*  @Column(name = "date", nullable = false)
+    private String date;*/
+
+  @Column(name = "date", nullable = false)
+    private Date date;
 
     @Column(name = "cupCount")
     private int cupCount;

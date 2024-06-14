@@ -1,5 +1,6 @@
 package by.bonk.cupcounter.command;
 
+import by.bonk.cupcounter.command.impl.EchoCommand;
 import by.bonk.cupcounter.command.impl.HelpCommand;
 import by.bonk.cupcounter.command.impl.StartCommand;
 import by.bonk.cupcounter.enumeration.Role;
@@ -20,14 +21,24 @@ public class CommandProvider {
     public CommandProvider() {
         // создаём команды и кладём их в hashmap
 
-        CommandKey adminOrdersKey = new CommandKey("/start", Role.UNKNOWN_ROLE);
-        commands.put(adminOrdersKey, new StartCommand());
+        CommandKey startUnknownOrdersKey = new CommandKey("/start", Role.UNKNOWN_ROLE);
+        commands.put(startUnknownOrdersKey, new StartCommand());
 
-        CommandKey userOrdersKey = new CommandKey("/help", Role.ROLE_USER);
-        commands.put(userOrdersKey, new HelpCommand());
+        CommandKey startOwnerOrdersKey = new CommandKey("/start", Role.ROLE_OWNER);
+        commands.put(startOwnerOrdersKey, new StartCommand());
+
+        CommandKey helpUserOrdersKey = new CommandKey("/help", Role.ROLE_USER);
+        commands.put(helpUserOrdersKey, new HelpCommand());
+
+        CommandKey helpOwnerOrdersKey = new CommandKey("/help", Role.ROLE_OWNER);
+        commands.put(helpOwnerOrdersKey, new HelpCommand());
+
         // другие команды
-        CommandKey echoOrdersKey = new CommandKey("/echo", Role.ROLE_USER);
-        commands.put(userOrdersKey, new EchoCommand());
+        CommandKey userEchoOrdersKey = new CommandKey("/echo", Role.ROLE_USER);
+        commands.put(userEchoOrdersKey, new EchoCommand());
+
+        CommandKey ownerEchoOrdersKey = new CommandKey("/echo", Role.ROLE_OWNER);
+        commands.put(ownerEchoOrdersKey, new EchoCommand());
 
     }
 

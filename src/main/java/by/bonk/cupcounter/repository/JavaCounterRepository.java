@@ -13,7 +13,7 @@ public interface JavaCounterRepository extends JpaRepository<JavaCounter, Long> 
     //Проверяет сущетствует ли запись в таблице по chatId
     <S extends JavaCounter> boolean existsJavaCounterByUserChatId(Long userChatId);
 
-    boolean existsJavaCounterByUserChatIdAndDate(Long userChatId, String date);
+  //  boolean existsJavaCounterByUserChatIdAndDate(Long userChatId, String date);
    JavaCounter findJavaCounterByUserChatId(Long userChatId);
 
     JavaCounter getReferenceByUserChatId(Long chatId);
